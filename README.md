@@ -10,6 +10,8 @@ Require this package, with [Composer](https://getcomposer.org/), in the root dir
 composer require wordplate/mail
 ```
 
+Login to the WordPress administrator dashboard and active the plugin.
+
 ## License
 
 Plate is licensed under [The MIT License (MIT)](LICENSE).
