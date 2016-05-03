@@ -15,23 +15,23 @@
  * Author: WordPlate
  * Author URI: https://wordplate.github.io
  * Version: 1.0.0
- * Plugin URI: https://github.com/wordplate/multisite
+ * Plugin URI: https://github.com/wordplate/mail
  */
 
  /*
   * Set custom smtp credentials.
   */
- add_action('phpmailer_init', function (PHPMailer $mail) {
-     $mail->IsSMTP();
-     $mail->SMTPAuth = true;
+add_action('phpmailer_init', function (PHPMailer $mail) {
+    $mail->IsSMTP();
+    $mail->SMTPAuth = true;
 
-     $mail->Host = env('MAIL_HOST');
-     $mail->Port = env('MAIL_PORT', 587);
-     $mail->Username = env('MAIL_USERNAME');
-     $mail->Password = env('MAIL_PASSWORD');
+    $mail->Host = env('MAIL_HOST');
+    $mail->Port = env('MAIL_PORT', 587);
+    $mail->Username = env('MAIL_USERNAME');
+    $mail->Password = env('MAIL_PASSWORD');
 
-     return $mail;
- });
+    return $mail;
+});
 
  /*
  * Set text/html content type for emails.
