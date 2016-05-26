@@ -14,4 +14,4 @@ Login to the WordPress administrator dashboard and active the plugin.
 
 ## License
 
-Plate is licensed under [The MIT License (MIT)](LICENSE).
+Mail is licensed under [The MIT License (MIT)](LICENSE).
