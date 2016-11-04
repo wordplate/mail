@@ -18,4 +18,4 @@ Login to the WordPress administrator dashboard and active the plugin.
 
 ## License
 
-Mail is licensed under [The MIT License (MIT)](LICENSE).
+[MIT](LICENSE) © [Vincent Klaiber](https://vinkla.com)
