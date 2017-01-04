@@ -18,6 +18,8 @@
  * Plugin URI: https://github.com/wordplate/mail
  */
 
+declare(strict_types=1);
+
  /*
   * Set custom smtp credentials.
   */
