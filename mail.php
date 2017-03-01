@@ -36,8 +36,8 @@ add_action('phpmailer_init', function (PHPMailer $mail) {
 });
 
  /*
- * Set text/html content type for emails.
+ * Set content type for emails, default to text/html.
  */
 add_filter('wp_mail_content_type', function () {
-    return 'text/html';
+    return env('MAIL_CONTENT_TYPE', 'text/html');
 });
