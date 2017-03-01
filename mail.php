@@ -20,9 +20,9 @@
 
 declare(strict_types=1);
 
- /*
-  * Set custom smtp credentials.
-  */
+/*
+ * Set custom smtp credentials.
+ */
 add_action('phpmailer_init', function (PHPMailer $mail) {
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
@@ -35,7 +35,7 @@ add_action('phpmailer_init', function (PHPMailer $mail) {
     return $mail;
 });
 
- /*
+/*
  * Set content type for emails, default to text/html.
  */
 add_filter('wp_mail_content_type', function () {
