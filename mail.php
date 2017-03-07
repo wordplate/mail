@@ -15,7 +15,7 @@
  * Author: WordPlate
  * Author URI: https://wordplate.github.io
  * Version: 1.2.1
- * Plugin URI: https://github.com/wordplate/mail
+ * Plugin URI: https://github.com/wordplate/mail#readme
  */
 
 declare(strict_types=1);
