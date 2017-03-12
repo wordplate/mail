@@ -24,13 +24,17 @@ declare(strict_types=1);
  * Set custom smtp credentials.
  */
 add_action('phpmailer_init', function (PHPMailer $mail) {
-    $mail->IsSMTP();
-    $mail->SMTPAuth = true;
+    $username = env('MAIL_USERNAME');
+    $password = env('MAIL_PASSWORD');
+
+    $mail->SMTPAuth = (!empty($username) && !empty($password));
 
     $mail->Host = env('MAIL_HOST');
     $mail->Port = env('MAIL_PORT', 587);
-    $mail->Username = env('MAIL_USERNAME');
-    $mail->Password = env('MAIL_PASSWORD');
+    $mail->Username = $username;
+    $mail->Password = $password;
+
+    $mail->IsSMTP();
 
     return $mail;
 });
