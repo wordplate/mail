@@ -25,7 +25,7 @@ declare(strict_types=1);
  */
 add_action('phpmailer_init', function (PHPMailer $mail) {
     $mail->IsSMTP();
-    $mail->SMTPAuth = true;
+    $mail->SMTPAuth = env('MAIL_USERNAME') && env('MAIL_PASSWORD');
 
     $mail->Host = env('MAIL_HOST');
     $mail->Port = env('MAIL_PORT', 587);
