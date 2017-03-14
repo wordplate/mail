@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.3.0 (released 2017-03-14)
+
+- Added username and password check
+
 ## 1.2.1 (released 2017-03-01)
 
 - Add MAIL_CONTENT_TYPE environment variable
