@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.4.0 (released 2017-05-03)
+
+- Add wordplate 5.0 support
+
 ## 1.3.0 (released 2017-03-14)
 
 - Added username and password check
