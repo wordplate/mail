@@ -14,7 +14,7 @@
  * Description: A mail plugin for WordPlate.
  * Author: WordPlate
  * Author URI: https://wordplate.github.io
- * Version: 1.4.0
+ * Version: 2.0.0
  * Plugin URI: https://github.com/wordplate/mail#readme
  */
 
@@ -34,12 +34,3 @@ add_action('phpmailer_init', function (PHPMailer $mail) {
 
     return $mail;
 });
-
-/*
- * Set content type for emails. If not set Wordpress uses mail headers or defaults to 'text/plain'.
- */
-if (env('MAIL_CONTENT_TYPE', NULL) !== NULL) {
-    add_filter('wp_mail_content_type', function () {
-        return env('MAIL_CONTENT_TYPE');
-    });
-}

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.0 (released 2017-05-04)
+
+- Remove content type
+
 ## 1.4.0 (released 2017-05-03)
 
 - Add wordplate 5.0 support
