@@ -2,7 +2,7 @@
 
 ## 2.1.0 (released 2017-10-16)
 
-- Remove wordplate framework dependency
+- Added WordPlate 6.0 support
 
 ## 2.0.0 (released 2017-05-04)
 
