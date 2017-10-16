@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.1.0 (released 2017-10-16)
+
+- Remove wordplate framework dependency
+
 ## 2.0.0 (released 2017-05-04)
 
 - Remove content type
