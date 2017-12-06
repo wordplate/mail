@@ -34,3 +34,19 @@ add_action('phpmailer_init', function (PHPMailer $mail) {
 
     return $mail;
 });
+
+// Add filter for default mail from address, if defined
+if (env('WP_MAIL_FROM')) {
+    define('WP_MAIL_FROM', env('WP_MAIL_FROM'));
+    add_filter('wp_mail_from', function ($email) {
+        return WP_MAIL_FROM;
+    });
+}
+
+// Add filter for default mail from name, if defined
+if (env('WP_MAIL_FROM_NAME')) {
+    define('WP_MAIL_FROM_NAME', env('WP_MAIL_FROM_NAME'));
+    add_filter('wp_mail_from_name', function ($from_name) {
+        return WP_MAIL_FROM_NAME;
+    });
+}
