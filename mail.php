@@ -46,7 +46,7 @@ if (env('WP_MAIL_FROM')) {
 // Add filter for default mail from name, if defined
 if (env('WP_MAIL_FROM_NAME')) {
     define('WP_MAIL_FROM_NAME', env('WP_MAIL_FROM_NAME'));
-    add_filter('wp_mail_from_name', function ($email) {
+    add_filter('wp_mail_from_name', function ($from_name) {
         return WP_MAIL_FROM_NAME;
     });
 }
