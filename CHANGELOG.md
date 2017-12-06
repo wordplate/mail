@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2.2.0 (released 2017-12-06)
+
+- Added from email and name support
+- Drop php 7.0 support
+
 ## 2.1.0 (released 2017-10-16)
 
 - Added WordPlate 6.0 support
