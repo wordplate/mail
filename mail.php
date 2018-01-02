@@ -35,18 +35,20 @@ add_action('phpmailer_init', function (PHPMailer $mail) {
     return $mail;
 });
 
-// Add filter for default mail from address, if defined
-if (env('WP_MAIL_FROM')) {
-    define('WP_MAIL_FROM', env('WP_MAIL_FROM'));
+// Add filter for default mail from address, if defined.
+if (env('MAIL_FROM_ADDRESS')) {
+    define('MAIL_FROM_ADDRESS', env('MAIL_FROM_ADDRESS'));
+    
     add_filter('wp_mail_from', function ($email) {
-        return WP_MAIL_FROM;
+        return MAIL_FROM_ADDRESS;
     });
 }
 
-// Add filter for default mail from name, if defined
-if (env('WP_MAIL_FROM_NAME')) {
-    define('WP_MAIL_FROM_NAME', env('WP_MAIL_FROM_NAME'));
+// Add filter for default mail from name, if defined.
+if (env('MAIL_FROM_NAME')) {
+    define('MAIL_FROM_NAME', env('MAIL_FROM_NAME'));
+    
     add_filter('wp_mail_from_name', function ($from_name) {
-        return WP_MAIL_FROM_NAME;
+        return MAIL_FROM_NAME;
     });
 }
