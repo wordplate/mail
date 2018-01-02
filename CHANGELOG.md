@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 3.0.0 (released 2017-01-02)
+
+- Update mail from constants
+- Removed wordplate dependency
+
 ## 2.2.0 (released 2017-12-06)
 
 - Added from email and name support

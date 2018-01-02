@@ -10,11 +10,15 @@
 
 Require this package, with [Composer](https://getcomposer.org), in the root directory of your project.
 
-```bash
-composer require wordplate/mail
+```sh
+$ composer require wordplate/mail
 ```
 
 Login to the WordPress administrator dashboard and active the plugin.
+
+## Documentation
+
+[Visit WordPlate's documentation](https://wordplate.github.io/docs/mail) to read more about this mail plugin.
 
 ## License
 
