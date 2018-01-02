@@ -20,7 +20,7 @@
 
 declare(strict_types=1);
 
-// If the environment function doesn't exists, we don't want to continue.
+// If the environment function doesn't exist, we don't want to continue.
 if (!function_exists('env')) {
     return;
 }
