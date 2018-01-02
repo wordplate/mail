@@ -14,11 +14,16 @@
  * Description: A mail plugin for WordPlate.
  * Author: WordPlate
  * Author URI: https://wordplate.github.io
- * Version: 2.0.0
+ * Version: 3.0.0
  * Plugin URI: https://github.com/wordplate/mail#readme
  */
 
 declare(strict_types=1);
+
+// If the environment function doesn't exists, we don't want to continue.
+if (!function_exists('env')) {
+    return;
+}
 
 /*
  * Set custom smtp credentials.
