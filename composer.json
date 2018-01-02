@@ -17,8 +17,7 @@
         }
     ],
     "require": {
-        "php": "^7.1",
-        "wordplate/framework": "^6.0"
+        "php": "^7.1"
     },
     "config": {
         "preferred-install": "dist"
