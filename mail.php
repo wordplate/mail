@@ -14,7 +14,7 @@
  * Description: A mail plugin for WordPlate.
  * Author: WordPlate
  * Author URI: https://wordplate.github.io
- * Version: 3.0.0
+ * Version: 3.1.0
  * Plugin URI: https://github.com/wordplate/mail#readme
  */
 
@@ -29,6 +29,9 @@ if (!function_exists('env')) {
 add_action('phpmailer_init', function (PHPMailer $mail) {
     $mail->IsSMTP();
     $mail->SMTPAuth = env('MAIL_USERNAME') && env('MAIL_PASSWORD');
+
+    $mail->SMTPAutoTLS = false;
+    $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');
 
     $mail->Host = env('MAIL_HOST');
     $mail->Port = env('MAIL_PORT', 587);

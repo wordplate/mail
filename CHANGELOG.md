@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 3.1.0 (released 2017-01-04)
+
+- Added mail encryption constant
+
 ## 3.0.0 (released 2017-01-02)
 
 - Update mail from constants
