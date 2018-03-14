@@ -59,7 +59,7 @@ if (env('MAIL_FROM_NAME')) {
     });
 }
 
-// Add abilit to override the attachment name in wp_mail() when adding attachments
+// Add abilit to override the attachment name in wp_mail() when adding attachments.
 add_filter('wp_mail', function ($args) {
     if (!isset($args['attachments']) || !is_array($args['attachments'])) {
         return $args;
@@ -86,12 +86,12 @@ add_filter('wp_mail', function ($args) {
         ]);
     }, $args['attachments']);
 
-    // Do nothing if attachments array is empty
+    // Do nothing if attachments array is empty.
     if (empty($attachments)) {
         return $args;
     }
 
-    // Empty attachments and add them in the PHPMailer hook
+    // Empty attachments and add them in the PHPMailer hook.
     $args['attachments'] = [];
 
     add_action('phpmailer_init', $callback = function (PHPMailer $mail) use ($attachments, &$callback) {
@@ -114,7 +114,7 @@ add_filter('wp_mail', function ($args) {
                 continue;
             }
         }
-    }, PHP_INT_MAX); // Run last
+    }, PHP_INT_MAX);
 
     return $args;
-}, PHP_INT_MAX); // Run last
+}, PHP_INT_MAX);
