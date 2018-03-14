@@ -14,7 +14,7 @@
  * Description: A mail plugin for WordPlate.
  * Author: WordPlate
  * Author URI: https://wordplate.github.io
- * Version: 3.1.0
+ * Version: 3.2.0
  * Plugin URI: https://github.com/wordplate/mail#readme
  */
 
@@ -118,4 +118,3 @@ add_filter('wp_mail', function ($args) {
 
     return $args;
 }, PHP_INT_MAX); // Run last
-

@@ -9,11 +9,6 @@
             "name": "Vincent Klaiber",
             "email": "hello@vinkla.com",
             "homepage": "https://vinkla.com"
-        },
-        {
-            "name": "Chris Andersson",
-            "email": "hello@puredazzle.se",
-            "homepage": "https://puredazzle.se"
         }
     ],
     "require": {
@@ -24,7 +19,7 @@
     },
     "extra":{
         "branch-alias": {
-            "dev-master": "3.1-dev"
+            "dev-master": "3.2-dev"
         }
     },
     "minimum-stability": "dev",
