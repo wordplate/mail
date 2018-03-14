@@ -59,7 +59,7 @@ if (env('MAIL_FROM_NAME')) {
     });
 }
 
-// Add abilit to override the attachment name in wp_mail() when adding attachments.
+// Add ability to override the attachment name in wp_mail() when adding attachments.
 add_filter('wp_mail', function ($args) {
     if (!isset($args['attachments']) || !is_array($args['attachments'])) {
         return $args;
