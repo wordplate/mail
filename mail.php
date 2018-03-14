@@ -58,3 +58,64 @@ if (env('MAIL_FROM_NAME')) {
         return MAIL_FROM_NAME;
     });
 }
+
+// Add abilit to override the attachment name in wp_mail() when adding attachments
+add_filter('wp_mail', function ($args) {
+    if (!isset($args['attachments']) || !is_array($args['attachments'])) {
+        return $args;
+    }
+
+    // Prepare new attachment array
+    $attachments = array_map(function ($attachment) {
+        if (!is_array($attachment)) {
+            return [
+                'path' => $attachment,
+                'name' => '',
+                'encoding' => 'base64',
+                'type' => '',
+                'disposition' => 'attachment',
+            ];
+        }
+
+        return wp_parse_args($attachment, [
+            'path' => null,
+            'name' => '',
+            'encoding' => 'base64',
+            'type' => '',
+            'disposition' => 'attachment',
+        ]);
+    }, $args['attachments']);
+
+    // Do nothing if attachments array is empty
+    if (empty($attachments)) {
+        return $args;
+    }
+
+    // Empty attachments and add them in the PHPMailer hook
+    $args['attachments'] = [];
+
+    add_action('phpmailer_init', $callback = function (PHPMailer $mail) use ($attachments, &$callback) {
+        remove_action('phpmailer_init', $callback, PHP_INT_MAX);
+
+        if (empty($attachments)) {
+            return;
+        }
+
+        foreach ($attachments as $attachment) {
+            try {
+                $mail->addAttachment(
+                    $attachment['path'],
+                    $attachment['name'],
+                    $attachment['encoding'],
+                    $attachment['type'],
+                    $attachment['disposition']
+                );
+            } catch (phpmailerException $ignored) {
+                continue;
+            }
+        }
+    }, PHP_INT_MAX); // Run last
+
+    return $args;
+}, PHP_INT_MAX); // Run last
+
