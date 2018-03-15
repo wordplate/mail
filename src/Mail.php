@@ -53,7 +53,7 @@ final class Mail
      *
      * @return void
      */
-    public function setCustomCredentials(PHPMailer $mail)
+    public function setCustomCredentials(PHPMailer $mail): void
     {
         $mail->IsSMTP();
         $mail->SMTPAutoTLS = false;
@@ -165,7 +165,7 @@ final class Mail
      *
      * @return void
      */
-    public function addMailAttachments(PHPMailer $mail)
+    public function addMailAttachments(PHPMailer $mail): void
     {
         remove_action('phpmailer_init', [$this, 'addMailAttachments'], PHP_INT_MAX);
 
