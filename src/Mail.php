@@ -25,14 +25,14 @@ use phpmailerException;
 final class Mail
 {
     /**
-     * Processed attachments.
+     * The processed attachments.
      *
      * @var array
      */
     protected $attachments;
 
     /**
-     * Initialize.
+     * Bootstrap the mail plugin.
      *
      * @return void
      */
@@ -70,7 +70,7 @@ final class Mail
     }
 
     /**
-     * Filter mail from address.
+     * Set custom mail from address.
      *
      * @param string $mailFromAddress
      *
@@ -91,7 +91,7 @@ final class Mail
     }
 
     /**
-     * Filter mail from name.
+     * Set custom mail from name.
      *
      * @param string $mailFromName
      *
