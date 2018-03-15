@@ -51,9 +51,9 @@ final class Mail
      *
      * @param \PHPMailer $mail
      *
-     * @return \PHPMailer
+     * @return void
      */
-    public function setCustomCredentials(PHPMailer $mail): PHPMailer
+    public function setCustomCredentials(PHPMailer $mail)
     {
         $mail->IsSMTP();
         $mail->SMTPAutoTLS = false;
@@ -67,8 +67,6 @@ final class Mail
             $mail->Username = env('MAIL_USERNAME');
             $mail->Password = env('MAIL_PASSWORD');
         }
-
-        return $mail;
     }
 
     /**
@@ -165,9 +163,9 @@ final class Mail
      *
      * @param \PHPMailer $mail
      *
-     * @return \PHPMailer
+     * @return void
      */
-    public function addMailAttachments(PHPMailer $mail): PHPMailer
+    public function addMailAttachments(PHPMailer $mail)
     {
         remove_action('phpmailer_init', [$this, 'addMailAttachments'], PHP_INT_MAX);
 
