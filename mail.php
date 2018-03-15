@@ -21,9 +21,7 @@
 declare(strict_types=1);
 
 if (!defined('ABSPATH')) {
-    exit(); // Exit if accessed directly
+    exit; // Exit if accessed directly
 }
 
-require(__DIR__.'/src/Mail.php');
-
-(new \WordPlate\Mail())->initialize();
+(new \WordPlate\Mail\Mail())->initialize();

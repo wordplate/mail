@@ -11,7 +11,7 @@
 
 declare(strict_types=1);
 
-namespace WordPlate;
+namespace WordPlate\Mail;
 
 use PHPMailer;
 use phpmailerException;
