@@ -36,7 +36,7 @@ final class Mail
      *
      * @return void
      */
-    public function initialize()
+    public function initialize(): void
     {
         add_action('phpmailer_init', [$this, 'setCustomCredentials']);
 
@@ -49,11 +49,11 @@ final class Mail
     /**
      * Set custom SMTP credentials.
      *
-     * @param PHPMailer $mail
+     * @param \PHPMailer $mail
      *
-     * @return PHPMailer
+     * @return \PHPMailer
      */
-    public function setCustomCredentials(PHPMailer $mail)
+    public function setCustomCredentials(PHPMailer $mail): PHPMailer
     {
         $mail->IsSMTP();
         $mail->SMTPAutoTLS = false;
@@ -78,7 +78,7 @@ final class Mail
      *
      * @return string
      */
-    public function filterMailFromAddress($mailFromAddress)
+    public function filterMailFromAddress(string $mailFromAddress): string
     {
         if (defined('MAIL_FROM_ADDRESS')) {
             return MAIL_FROM_ADDRESS;
@@ -99,7 +99,7 @@ final class Mail
      *
      * @return string
      */
-    public function filterMailFromName($mailFromName)
+    public function filterMailFromName(string $mailFromName): string
     {
         if (defined('MAIL_FROM_NAME')) {
             return MAIL_FROM_NAME;
@@ -120,7 +120,7 @@ final class Mail
      *
      * @return array
      */
-    public function filterMailAttachments($args)
+    public function filterMailAttachments(array $args): array
     {
         if (empty($args['attachments']) || !is_array($args['attachments'])) {
             return $args;
@@ -163,11 +163,11 @@ final class Mail
     /**
      * Add ability to override the attachment name in wp_mail() when adding attachments.
      *
-     * @param PHPMailer $mail
+     * @param \PHPMailer $mail
      *
-     * @return PHPMailer
+     * @return \PHPMailer
      */
-    public function addMailAttachments(PHPMailer $mail)
+    public function addMailAttachments(PHPMailer $mail): PHPMailer
     {
         remove_action('phpmailer_init', [$this, 'addMailAttachments'], PHP_INT_MAX);
 
