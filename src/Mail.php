@@ -126,7 +126,7 @@ final class Mail
             return $args;
         }
 
-        // Prepare new attachments array
+        // Prepare new attachments array.
         $this->attachments = array_map(function ($attachment) {
             if (!is_array($attachment)) {
                 return [
@@ -152,7 +152,7 @@ final class Mail
 
         add_action('phpmailer_init', [$this, 'addMailAttachments'], PHP_INT_MAX);
 
-        // Remove listner if mail failed
+        // Remove listener if mail failed.
         add_action('wp_mail_failed', function ($error) {
             remove_action('phpmailer_init', [$this, 'addMailAttachments'], PHP_INT_MAX);
         });
