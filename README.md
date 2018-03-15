@@ -42,6 +42,29 @@ MAIL_FROM_NAME=null
 
 Please visit the [WordPress documentation](https://developer.wordpress.org/reference/hooks/phpmailer_init) to read more about the `phpmailer_init` action hook.
 
+## Attachments
+
+Generally [`wp_mail`](https://developer.wordpress.org/reference/functions/wp_mail) only accept a flat array with filenames (or comma separated string), the WordPlate mail plugin allows you to send all variables accepted by [PHPMailer](https://github.com/PHPMailer/PHPMailer#a-simple-example), like name, encoding & disposition. The plugin accepts both the old way, with flat array, as well as the the new format, see example below:
+
+```php
+wp_mail('marty@mcfly.se', 'Time Travel', 'This is heavy', '', [
+    [
+        'path' => __DIR__.'/images/beer-image-v1.jpg',
+        'name' => 'beer.jpg',
+        'encoding' => '8bit',
+        'type' => 'image/jpeg',
+        'disposition' => 'attachment',
+    ],
+    [
+        'path' => __DIR__.'/images/logo.png',
+        'name' => 'logo.jpg',
+        'encoding' => 'base64',
+        'type' => 'image/png',
+        'disposition' => 'inline',
+    ],
+]);
+```
+
 ## License
 
 [MIT](LICENSE) © [Vincent Klaiber](https://vinkla.com)
