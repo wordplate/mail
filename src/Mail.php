@@ -24,7 +24,6 @@ use phpmailerException;
  */
 final class Mail
 {
-
     /**
      * Processed attachments.
      *
@@ -83,8 +82,10 @@ final class Mail
     {
         if (defined('MAIL_FROM_ADDRESS')) {
             return MAIL_FROM_ADDRESS;
-        } else if (function_exists('env') && env('MAIL_FROM_ADDRESS')) {
+        }
+        if (function_exists('env') && env('MAIL_FROM_ADDRESS')) {
             define('MAIL_FROM_ADDRESS', env('MAIL_FROM_ADDRESS'));
+
             return MAIL_FROM_ADDRESS;
         }
 
@@ -102,8 +103,10 @@ final class Mail
     {
         if (defined('MAIL_FROM_NAME')) {
             return MAIL_FROM_NAME;
-        } else if (function_exists('env') && env('MAIL_FROM_NAME')) {
+        }
+        if (function_exists('env') && env('MAIL_FROM_NAME')) {
             define('MAIL_FROM_NAME', env('MAIL_FROM_NAME'));
+
             return MAIL_FROM_NAME;
         }
 
