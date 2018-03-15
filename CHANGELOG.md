@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 4.0.0 (released 2018-03-15)
+
+- Added mail class
+- Updated PHPMailer attachment support
+
 ## 3.1.0 (released 2017-01-04)
 
 - Added mail encryption constant
