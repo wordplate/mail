@@ -24,4 +24,6 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 
+require __DIR__.'/src/Mail.php';
+
 (new \WordPlate\Mail\Mail())->initialize();
