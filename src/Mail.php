@@ -58,7 +58,7 @@ final class Mail
         $mail->IsSMTP();
         $mail->SMTPAutoTLS = false;
 
-        if (!function_exists('env')) {
+        if (function_exists('env')) {
             $mail->SMTPAuth = env('MAIL_USERNAME') && env('MAIL_PASSWORD');
             $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');
 
