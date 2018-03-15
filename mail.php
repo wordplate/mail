@@ -20,88 +20,172 @@
 
 declare(strict_types=1);
 
+namespace WordPlate;
+
+if (!defined('ABSPATH')) {
+    exit(); // Exit if accessed directly
+}
+
 // If the environment function doesn't exist, we don't want to continue.
 if (!function_exists('env')) {
     return;
 }
 
-// Add custom SMTP credentials.
-add_action('phpmailer_init', function (PHPMailer $mail) {
-    $mail->IsSMTP();
-    $mail->SMTPAuth = env('MAIL_USERNAME') && env('MAIL_PASSWORD');
+/**
+ * This is the mail class.
+ *
+ * @author Daniel Gerdgren <daniel@gerdgren.se>
+ * @author Vincent Klaiber <hello@vinkla.com>
+ */
+final class Mail
+{
 
-    $mail->SMTPAutoTLS = false;
-    $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');
+    /**
+     * Processed attachments.
+     *
+     * @var array
+     */
+    protected $attachments;
 
-    $mail->Host = env('MAIL_HOST');
-    $mail->Port = env('MAIL_PORT', 587);
-    $mail->Username = env('MAIL_USERNAME');
-    $mail->Password = env('MAIL_PASSWORD');
+    /**
+     * Initialize.
+     *
+     * @return void
+     */
+    public function initialize()
+    {
+        add_action('phpmailer_init', [$this, 'setCustomCredentials']);
 
-    return $mail;
-});
+        add_filter('wp_mail_from', [$this, 'filterMailFromAddress']);
+        add_filter('wp_mail_from_name', [$this, 'filterMailFromName']);
 
-// Add filter for default mail from address, if defined.
-if (env('MAIL_FROM_ADDRESS')) {
-    define('MAIL_FROM_ADDRESS', env('MAIL_FROM_ADDRESS'));
-
-    add_filter('wp_mail_from', function () {
-        return MAIL_FROM_ADDRESS;
-    });
-}
-
-// Add filter for default mail from name, if defined.
-if (env('MAIL_FROM_NAME')) {
-    define('MAIL_FROM_NAME', env('MAIL_FROM_NAME'));
-
-    add_filter('wp_mail_from_name', function () {
-        return MAIL_FROM_NAME;
-    });
-}
-
-// Add ability to override the attachment name in wp_mail() when adding attachments.
-add_filter('wp_mail', function ($args) {
-    if (!isset($args['attachments']) || !is_array($args['attachments'])) {
-        return $args;
+        add_filter('wp_mail', [$this, 'filterMailAttachments'], PHP_INT_MAX);
     }
 
-    // Prepare new attachment array
-    $attachments = array_map(function ($attachment) {
-        if (!is_array($attachment)) {
-            return [
-                'path' => $attachment,
+    /**
+     * Set custom SMTP credentials.
+     *
+     * @param \PHPMailer $mail
+     *
+     * @return \PHPMailer
+     */
+    public function setCustomCredentials(\PHPMailer $mail)
+    {
+        $mail->IsSMTP();
+        $mail->SMTPAuth = env('MAIL_USERNAME') && env('MAIL_PASSWORD');
+
+        $mail->SMTPAutoTLS = false;
+        $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');
+
+        $mail->Host = env('MAIL_HOST');
+        $mail->Port = env('MAIL_PORT', 587);
+        $mail->Username = env('MAIL_USERNAME');
+        $mail->Password = env('MAIL_PASSWORD');
+
+        return $mail;
+    }
+
+    /**
+     * Filter mail from address.
+     *
+     * @param string $mailFromAddress
+     *
+     * @return string
+     */
+    public function filterMailFromAddress($mailFromAddress)
+    {
+        if (defined('MAIL_FROM_ADDRESS')) {
+            return MAIL_FROM_ADDRESS;
+        } else if (env('MAIL_FROM_ADDRESS')) {
+            define('MAIL_FROM_ADDRESS', env('MAIL_FROM_ADDRESS'));
+            return MAIL_FROM_ADDRESS;
+        }
+
+        return $mailFromAddress;
+    }
+
+    /**
+     * Filter mail from name.
+     *
+     * @param string $mailFromName
+     *
+     * @return string
+     */
+    public function filterMailFromName($mailFromName)
+    {
+        if (defined('MAIL_FROM_NAME')) {
+            return MAIL_FROM_NAME;
+        } else if (env('MAIL_FROM_NAME')) {
+            define('MAIL_FROM_NAME', env('MAIL_FROM_NAME'));
+            return MAIL_FROM_NAME;
+        }
+
+        return $mailFromName;
+    }
+
+    /**
+     * Add ability to override the attachment name in wp_mail() when adding attachments.
+     *
+     * @param array $args
+     *
+     * @return array
+     */
+    public function filterMailAttachments($args)
+    {
+        if (empty($args['attachments']) || !is_array($args['attachments'])) {
+            return $args;
+        }
+
+        // Prepare new attachments array
+        $this->attachments = array_map(function ($attachment) {
+            if (!is_array($attachment)) {
+                return [
+                    'path' => $attachment,
+                    'name' => '',
+                    'encoding' => 'base64',
+                    'type' => '',
+                    'disposition' => 'attachment',
+                ];
+            }
+
+            return wp_parse_args($attachment, [
+                'path' => null,
                 'name' => '',
                 'encoding' => 'base64',
                 'type' => '',
                 'disposition' => 'attachment',
-            ];
-        }
+            ]);
+        }, $args['attachments']);
 
-        return wp_parse_args($attachment, [
-            'path' => null,
-            'name' => '',
-            'encoding' => 'base64',
-            'type' => '',
-            'disposition' => 'attachment',
-        ]);
-    }, $args['attachments']);
+        // Empty attachments and add them in the PHPMailer hook.
+        $args['attachments'] = [];
 
-    // Do nothing if attachments array is empty.
-    if (empty($attachments)) {
+        add_action('phpmailer_init', [$this, 'addMailAttachments'], PHP_INT_MAX);
+
+        // Remove listner if mail failed
+        add_action('wp_mail_failed', function ($error) {
+            remove_action('phpmailer_init', [$this, 'addMailAttachments'], PHP_INT_MAX);
+        });
+
         return $args;
     }
 
-    // Empty attachments and add them in the PHPMailer hook.
-    $args['attachments'] = [];
+    /**
+     * Add ability to override the attachment name in wp_mail() when adding attachments.
+     *
+     * @param \PHPMailer $mail
+     *
+     * @return \PHPMailer
+     */
+    public function addMailAttachments(\PHPMailer $mail)
+    {
+        remove_action('phpmailer_init', [$this, 'addMailAttachments'], PHP_INT_MAX);
 
-    add_action('phpmailer_init', $callback = function (PHPMailer $mail) use ($attachments, &$callback) {
-        remove_action('phpmailer_init', $callback, PHP_INT_MAX);
-
-        if (empty($attachments)) {
+        if (empty($this->attachments)) {
             return;
         }
 
-        foreach ($attachments as $attachment) {
+        foreach ($this->attachments as $attachment) {
             try {
                 $mail->addAttachment(
                     $attachment['path'],
@@ -110,11 +194,11 @@ add_filter('wp_mail', function ($args) {
                     $attachment['type'],
                     $attachment['disposition']
                 );
-            } catch (phpmailerException $ignored) {
+            } catch (\phpmailerException $ignored) {
                 continue;
             }
         }
-    }, PHP_INT_MAX);
+    }
+}
 
-    return $args;
-}, PHP_INT_MAX);
+(new Mail())->initialize();
