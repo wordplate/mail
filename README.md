@@ -31,6 +31,8 @@ MAIL_ENCRYPTION=null
 
 Then login to the WordPress administrator dashboard and active the plugin.
 
+#### Name & Address
+
 Optionally you may also specify the global "from" address and name.
 
 ```
