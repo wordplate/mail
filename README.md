@@ -6,10 +6,9 @@
 
 To send email with WordPress you can use the [`wp_mail`](https://developer.wordpress.org/reference/functions/wp_mail) helper method. WordPlate provides a simple way to add custom SMTP credentials and easier working with attachments.
 
-[![StyleCI](https://styleci.io/repos/57282597/shield?style=flat)](https://styleci.io/repos/57282597)
-[![Total Downloads](https://img.shields.io/packagist/dt/wordplate/mail.svg?style=flat)](https://packagist.org/packages/wordplate/mail)
-[![Latest Version](https://img.shields.io/github/release/wordplate/mail.svg?style=flat)](https://github.com/wordplate/mail/releases)
-[![License](https://img.shields.io/packagist/l/wordplate/mail.svg?style=flat)](https://packagist.org/packages/wordplate/mail)
+[![Total Downloads](https://badgen.net/packagist/dt/wordplate/mail)](https://packagist.org/packages/wordplate/mail)
+[![Latest Version](https://badgen.net/github/release/wordplate/mail)](https://github.com/wordplate/mail/releases)
+[![License](https://badgen.net/packagist/license/wordplate/mail)](https://packagist.org/packages/wordplate/mail)
 
 ## Installation
 
