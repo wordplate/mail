@@ -1,8 +1,13 @@
 {
     "name": "wordplate/mail",
-    "description": "A mail plugin for WordPlate",
-    "keywords": ["wordplate", "mail", "wordpress", "plugin"],
     "type": "wordpress-plugin",
+    "description": "A mail plugin for WordPlate",
+    "keywords": [
+        "wordplate",
+        "mail",
+        "wordpress",
+        "plugin"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -17,7 +22,7 @@
     "config": {
         "preferred-install": "dist"
     },
-    "extra":{
+    "extra": {
         "branch-alias": {
             "dev-master": "4.0-dev"
         }
