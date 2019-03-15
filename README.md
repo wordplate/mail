@@ -66,4 +66,4 @@ wp_mail('marty@mcfly.se', 'Time Travel', 'This is heavy', '', [
 
 ## License
 
-[MIT](LICENSE) © [Vincent Klaiber](https://vinkla.com)
+[MIT](LICENSE) © [Vincent Klaiber](https://doubledip.se)
