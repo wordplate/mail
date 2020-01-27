@@ -1,12 +1,12 @@
 <?php
 
-/*
- * This file is part of WordPlate.
- *
- * (c) Vincent Klaiber <hello@doubledip.se>
+/**
+ * Copyright (c) Vincent Klaiber.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
+ *
+ * @see https://github.com/wordplate/mail
  */
 
 declare(strict_types=1);
@@ -16,26 +16,13 @@ namespace WordPlate\Mail;
 use PHPMailer;
 use phpmailerException;
 
-/**
- * This is the mail class.
- *
- * @author Daniel Gerdgren <daniel@gerdgren.se>
- * @author Vincent Klaiber <hello@doubledip.se>
- */
 final class Mail
 {
     /**
-     * The processed attachments.
-     *
      * @var array
      */
     protected $attachments;
 
-    /**
-     * Bootstrap the mail plugin.
-     *
-     * @return void
-     */
     public function initialize(): void
     {
         add_action('phpmailer_init', [$this, 'setCustomCredentials']);
@@ -46,13 +33,6 @@ final class Mail
         add_filter('wp_mail', [$this, 'filterMailAttachments'], PHP_INT_MAX);
     }
 
-    /**
-     * Set custom SMTP credentials.
-     *
-     * @param \PHPMailer $mail
-     *
-     * @return void
-     */
     public function setCustomCredentials(PHPMailer $mail): void
     {
         $mail->IsSMTP();
@@ -69,13 +49,6 @@ final class Mail
         }
     }
 
-    /**
-     * Set custom mail from address.
-     *
-     * @param string $mailFromAddress
-     *
-     * @return string
-     */
     public function filterMailFromAddress(string $mailFromAddress): string
     {
         if (defined('MAIL_FROM_ADDRESS')) {
@@ -91,13 +64,6 @@ final class Mail
         return $mailFromAddress;
     }
 
-    /**
-     * Set custom mail from name.
-     *
-     * @param string $mailFromName
-     *
-     * @return string
-     */
     public function filterMailFromName(string $mailFromName): string
     {
         if (defined('MAIL_FROM_NAME')) {
@@ -113,15 +79,10 @@ final class Mail
         return $mailFromName;
     }
 
-    /**
-     * Add ability to override the attachment name in wp_mail() when adding attachments.
-     *
-     * @param array $args
-     *
-     * @return array
-     */
     public function filterMailAttachments(array $args): array
     {
+        // Add ability to override the attachment name in wp_mail() when adding
+        // attachments.
         if (empty($args['attachments']) || !is_array($args['attachments'])) {
             return $args;
         }
@@ -160,15 +121,10 @@ final class Mail
         return $args;
     }
 
-    /**
-     * Add ability to override the attachment name in wp_mail() when adding attachments.
-     *
-     * @param \PHPMailer $mail
-     *
-     * @return void
-     */
     public function addMailAttachments(PHPMailer $mail): void
     {
+        // Add ability to override the attachment name in wp_mail() when adding
+        // attachments.
         remove_action('phpmailer_init', [$this, 'addMailAttachments'], PHP_INT_MAX);
 
         if (empty($this->attachments)) {
