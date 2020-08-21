@@ -14,7 +14,7 @@
  * Description: A mail plugin for WordPlate.
  * Author: WordPlate
  * Author URI: https://wordplate.github.io/
- * Version: 4.0.0
+ * Version: 5.0.0
  * Plugin URI: https://github.com/wordplate/mail
  */
 
