@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace WordPlate\Mail;
 
-use PHPMailer;
-use phpmailerException;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 final class Mail
 {
@@ -140,7 +140,7 @@ final class Mail
                     $attachment['type'],
                     $attachment['disposition']
                 );
-            } catch (phpmailerException $ignored) {
+            } catch (Exception $ignored) {
                 continue;
             }
         }
