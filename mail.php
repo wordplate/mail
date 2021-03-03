@@ -11,19 +11,50 @@
 
 /*
  * Plugin Name: Mail
- * Description: A mail plugin for WordPlate.
+ * Description: A custom SMTP credentials plugin for WordPress.
  * Author: WordPlate
- * Author URI: https://wordplate.github.io/
- * Version: 6.0.1
+ * Author URI: https://github.com/wordplate/wordplate
+ * Version: 7.0.0
  * Plugin URI: https://github.com/wordplate/mail
  */
 
-declare(strict_types=1);
+use PHPMailer\PHPMailer\PHPMailer;
 
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly
+function mail_credentials(PHPMailer $mail)
+{
+    $mail->IsSMTP();
+    $mail->SMTPAutoTLS = false;
+
+    $mail->SMTPAuth = true;
+    $mail->SMTPSecure = $_ENV['MAIL_ENCRYPTION'] ?? 'tls';
+
+    $mail->Host = $_ENV['MAIL_HOST'];
+    $mail->Port = $_ENV['MAIL_PORT'] ?? 587;
+    $mail->Username = $_ENV['MAIL_USERNAME'];
+    $mail->Password = $_ENV['MAIL_PASSWORD'];
+
+    return $mail;
 }
 
-require __DIR__ . '/src/Mail.php';
+add_action('phpmailer_init', 'mail_credentials');
 
-(new \WordPlate\Mail\Mail())->initialize();
+function mail_content_type()
+{
+    return 'text/html';
+}
+
+add_filter('wp_mail_content_type', 'mail_content_type');
+
+function mail_from_address()
+{
+    return $_ENV['MAIL_TO_ADDRESS'] ?? 'hello@example.com';
+}
+
+add_filter('wp_mail_from', 'mail_from_address');
+
+function mail_from_name()
+{
+    return $_ENV['MAIL_FROM_NAME'] ?? 'Example';
+}
+
+add_filter('wp_mail_from_name', 'mail_from_name');

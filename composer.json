@@ -1,7 +1,7 @@
 {
     "name": "wordplate/mail",
     "type": "wordpress-plugin",
-    "description": "A mail plugin for WordPlate",
+    "description": "A SMTP plugin for WordPlate",
     "keywords": [
         "wordplate",
         "mail",
@@ -23,7 +23,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "6.0-dev"
+            "dev-master": "7.0-dev"
         }
     },
     "minimum-stability": "dev",
