@@ -1,7 +1,5 @@
 # Mail
 
-![mail](https://user-images.githubusercontent.com/499192/37464248-1282c40a-2858-11e8-801c-571c1dedf310.png)
-
 > A [SMTP](https://developer.wordpress.org/reference/hooks/phpmailer_init/) plugin for WordPlate.
 
 To send email with WordPress you can use the [`wp_mail`](https://developer.wordpress.org/reference/functions/wp_mail) helper method. WordPlate provides a simple way to add custom SMTP credentials.
@@ -11,7 +9,7 @@ To send email with WordPress you can use the [`wp_mail`](https://developer.wordp
 
 ## Installation
 
-Require the mail package, with Composer, in the root directory of your project.
+Require the package, with Composer, in the root directory of your project.
 
 ```sh
 composer require wordplate/mail

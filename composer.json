@@ -21,11 +21,6 @@
     "config": {
         "preferred-install": "dist"
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "7.0-dev"
-        }
-    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
