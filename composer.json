@@ -1,7 +1,7 @@
 {
     "name": "wordplate/mail",
     "type": "wordpress-plugin",
-    "description": "A SMTP plugin for WordPlate",
+    "description": "A custom SMTP credentials plugin for WordPress",
     "keywords": [
         "wordplate",
         "mail",

@@ -1,6 +1,6 @@
 # Mail
 
-> A [SMTP](https://developer.wordpress.org/reference/hooks/phpmailer_init/) plugin for WordPlate.
+> A custom [SMTP](https://developer.wordpress.org/reference/hooks/phpmailer_init/) credentials plugin for WordPress.
 
 To send email with WordPress you can use the [`wp_mail`](https://developer.wordpress.org/reference/functions/wp_mail) helper method. WordPlate provides a simple way to add custom SMTP credentials.
 
