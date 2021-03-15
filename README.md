@@ -15,7 +15,7 @@ Require the package, with Composer, in the root directory of your project.
 composer require wordplate/mail
 ```
 
-Then update the credentials in your `.env` environment file with your SMTP keys.
+Login to the WordPress administrator dashboard and active the plugin. Then update the credentials in your `.env` environment file with your SMTP keys.
 
 ```
 MAIL_HOST=null
@@ -23,9 +23,11 @@ MAIL_PORT=587
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
 MAIL_ENCRYPTION=tls
+```
+
+If you want to specify default from name and email you may add the following two variables to your environment file:
+
+```
 MAIL_FROM_ADDRESS=null
 MAIL_FROM_NAME=null
 ```
-
-Then login to the WordPress administrator dashboard and active the plugin.
-

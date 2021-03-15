@@ -14,7 +14,7 @@
  * Description: A custom SMTP credentials plugin for WordPress.
  * Author: WordPlate
  * Author URI: https://github.com/wordplate/wordplate
- * Version: 7.0.0
+ * Version: 7.1.0
  * Plugin URI: https://github.com/wordplate/mail
  */
 
@@ -45,16 +45,20 @@ function mail_content_type()
 
 add_filter('wp_mail_content_type', 'mail_content_type');
 
-function mail_from_address()
-{
-    return $_ENV['MAIL_TO_ADDRESS'] ?? 'hello@example.com';
+if (isset($_ENV['MAIL_TO_ADDRESS'])) {
+    function mail_from_address()
+    {
+        return $_ENV['MAIL_TO_ADDRESS'];
+    }
+
+    add_filter('wp_mail_from', 'mail_from_address');
 }
 
-add_filter('wp_mail_from', 'mail_from_address');
+if (isset($_ENV['MAIL_FROM_NAME'])) {
+    function mail_from_name()
+    {
+        return $_ENV['MAIL_FROM_NAME'];
+    }
 
-function mail_from_name()
-{
-    return $_ENV['MAIL_FROM_NAME'] ?? 'Example';
+    add_filter('wp_mail_from_name', 'mail_from_name');
 }
-
-add_filter('wp_mail_from_name', 'mail_from_name');
