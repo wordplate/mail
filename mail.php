@@ -45,14 +45,12 @@ function mail_content_type()
 
 add_filter('wp_mail_content_type', 'mail_content_type');
 
-if (isset($_ENV['MAIL_FROM_ADDRESS'])) {
-    function mail_from_address()
-    {
-        return $_ENV['MAIL_FROM_ADDRESS'];
-    }
-
-    add_filter('wp_mail_from', 'mail_from_address');
+function mail_from_address()
+{
+    return $_ENV['MAIL_FROM_ADDRESS'] ?? $_ENV['MAIL_USERNAME'];
 }
+
+add_filter('wp_mail_from', 'mail_from_address');
 
 if (isset($_ENV['MAIL_FROM_NAME'])) {
     function mail_from_name()
