@@ -14,7 +14,7 @@
  * Description: A custom SMTP credentials plugin for WordPress.
  * Author: WordPlate
  * Author URI: https://github.com/wordplate/wordplate
- * Version: 7.1.2
+ * Version: 7.2.0
  * Plugin URI: https://github.com/wordplate/mail
  */
 

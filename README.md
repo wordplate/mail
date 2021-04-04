@@ -25,7 +25,7 @@ MAIL_PASSWORD=null
 MAIL_ENCRYPTION=tls
 ```
 
-If you want to specify default from name and email you may add the following two variables to your environment file:
+If you want to specify a custom name and email address for outgoing mail, you may add the following two variables to your environment file:
 
 ```
 MAIL_FROM_ADDRESS=null
