@@ -1,14 +1,14 @@
 {
     "name": "wordplate/mail",
-    "type": "wordpress-plugin",
     "description": "A custom SMTP credentials plugin for WordPress",
+    "license": "MIT",
+    "type": "wordpress-plugin",
     "keywords": [
         "wordplate",
         "mail",
         "wordpress",
         "plugin"
     ],
-    "license": "MIT",
     "authors": [
         {
             "name": "Vincent Klaiber",
@@ -16,11 +16,11 @@
         }
     ],
     "require": {
-        "php": "^7.4 || ^8.0"
-    },
-    "config": {
-        "preferred-install": "dist"
+        "php": "^8.0"
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "config": {
+        "preferred-install": "dist"
+    }
 }
